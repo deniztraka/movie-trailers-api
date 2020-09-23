@@ -10,7 +10,7 @@ app.use(bodyParser.json());
 
 //routes
 app.get("/", (req, res) => {
-    res.send("online");
+    res.send("online v1");
 });
 
 app.listen(process.env.PORT || 3000, () => {
