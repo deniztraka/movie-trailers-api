@@ -32,8 +32,7 @@ redisClient.on('error', function (err) {
     console.log('error on redis client connection on host ' + process.env.REDIS_CLUSTER_HOST + ' - ' + err);
 });
 
-import authMiddleware from './auth/okta';
-app.use(authMiddleware);
+
 
 //routes
 import trailersRoute from './routes/trailers';

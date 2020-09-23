@@ -1,10 +1,12 @@
 "use strict";
 
 import express from 'express';
+import authMiddleware from '../auth/okta';
+
 const router = express.Router();
 
-router.get('/v1/trailers', async (req, res) => {
-    
+router.get('/v1/trailers', authMiddleware, async (req, res) => {
+
 
     await res.json({
         code: 200,
