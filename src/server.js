@@ -6,7 +6,8 @@ import dotenv from 'dotenv';
 import helmet from 'helmet';
 import cors from 'cors';
 import morgan from 'morgan';
-
+// env variables
+dotenv.config();
 
 const app = express();
 
@@ -22,9 +23,6 @@ app.use(cors());
 // adding morgan to log HTTP requests
 app.use(morgan('combined'));
 
-// env variables
-dotenv.config();
-
 // redis test
 var redisClient = redis.createClient(6379, process.env.REDIS_CLUSTER_HOST);
 redisClient.on('connect', function () {
@@ -33,6 +31,9 @@ redisClient.on('connect', function () {
 redisClient.on('error', function (err) {
     console.log('error on redis client connection on host ' + process.env.REDIS_CLUSTER_HOST + ' - ' + err);
 });
+
+import authMiddleware from './auth/okta';
+app.use(authMiddleware);
 
 //routes
 import trailersRoute from './routes/trailers';
