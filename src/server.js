@@ -13,11 +13,11 @@ var redis = require('redis');
 var redisClient = redis.createClient(6379, process.env.REDIS_CLUSTER_HOST);
 
 redisClient.on('connect', function () {
-    console.log('redis client is succesfully connected.');
+    console.log('redis client is succesfully connected on host ' + process.env.REDIS_CLUSTER_HOST);
 });
 
 redisClient.on('error', function (err) {
-    console.log('error on redis client connection' + err);
+    console.log('error on redis client connection on host ' + process.env.REDIS_CLUSTER_HOST + ' - ' + err);
 });
 
 //routes
