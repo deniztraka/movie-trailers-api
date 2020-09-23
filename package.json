@@ -2,9 +2,10 @@
   "name": "movie-trailers-api",
   "version": "1.0.0",
   "description": "",
-  "main": "index.js",
+  "main": "src/server.js",
   "scripts": {
-    "start": "nodemon --exec babel-node index",
+    "build": "babel src -d dist --source-maps",
+    "start": "nodemon --exec babel-node src/server",
     "test": "jest --runInBand ./test"
   },
   "repository": {
@@ -21,16 +22,17 @@
     "@babel/cli": "^7.10.1",
     "@babel/core": "^7.10.2",
     "@babel/node": "^7.10.1",
+    "@babel/plugin-transform-runtime": "^7.10.1",
     "@babel/preset-env": "^7.10.2",
+    "babel-polyfill": "^6.26.0",
     "body-parser": "^1.19.0",
     "dotenv": "^8.2.0",
     "express": "^4.17.1",
     "express-async-errors": "^3.1.1",
+    "jest": "^25.5.4",
     "moment": "^2.26.0",
     "nodemon": "^2.0.4",
-    "jest": "^25.5.4",
-    "@babel/plugin-transform-runtime": "^7.10.1",
-    "babel-polyfill": "^6.26.0"
+    "redis": "^3.0.2"
   },
   "devDependencies": {}
 }
