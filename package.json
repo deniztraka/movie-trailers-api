@@ -1,0 +1,36 @@
+{
+  "name": "movie-trailers-api",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "start": "nodemon --exec babel-node index",
+    "test": "jest --runInBand ./test"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/deniztraka/movie-trailers-api.git"
+  },
+  "author": "deniz traka",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/deniztraka/movie-trailers-api/issues"
+  },
+  "homepage": "https://github.com/deniztraka/movie-trailers-api#readme",
+  "dependencies": {
+    "@babel/cli": "^7.10.1",
+    "@babel/core": "^7.10.2",
+    "@babel/node": "^7.10.1",
+    "@babel/preset-env": "^7.10.2",
+    "body-parser": "^1.19.0",
+    "dotenv": "^8.2.0",
+    "express": "^4.17.1",
+    "express-async-errors": "^3.1.1",
+    "moment": "^2.26.0",
+    "nodemon": "^2.0.4",
+    "jest": "^25.5.4",
+    "@babel/plugin-transform-runtime": "^7.10.1",
+    "babel-polyfill": "^6.26.0"
+  },
+  "devDependencies": {}
+}
