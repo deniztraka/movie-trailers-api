@@ -1,7 +1,6 @@
 import express from 'express';
 import 'express-async-errors';
 import bodyParser from 'body-parser';
-import redis from 'redis';
 import helmet from 'helmet';
 import cors from 'cors';
 import morgan from 'morgan';
@@ -23,16 +22,6 @@ app.use(cors());
 
 // adding morgan to log HTTP requests
 app.use(morgan('combined'));
-
-// redis test
-var redisClient = redis.createClient(6379, process.env.REDIS_CLUSTER_HOST);
-redisClient.on('connect', function () {
-    console.log('redis client is succesfully connected on host ' + process.env.REDIS_CLUSTER_HOST);
-});
-redisClient.on('error', function (err) {
-    console.log('error on redis client connection on host ' + process.env.REDIS_CLUSTER_HOST + ' - ' + err);
-});
-
 
 
 //routes

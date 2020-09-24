@@ -18,18 +18,18 @@ router.get('/v1/trailers', authMiddleware, async (req, res) => {
     var movieSearchServiceResponse = await movieSearchService.sendRequest({
         q: searchPhrase
     });
-    console.log(movieSearchServiceResponse);
+    //console.log(movieSearchServiceResponse.length + " movies");
 
     //video serch service request
-    var videoSearchService = localServiceRegistery.get(process.env.VIDEO_SEARCH_SERVICE);
-    var videoSearchServiceResponse = await videoSearchService.sendRequest({
-        q: searchPhrase,
-        part: 'snippet,id',
-        maxResults: 25,
-        topicId: '/m/02vxn'
+    // var videoSearchService = localServiceRegistery.get(process.env.VIDEO_SEARCH_SERVICE);
+    // var videoSearchServiceResponse = await videoSearchService.sendRequest({
+    //     q: searchPhrase,
+    //     part: 'snippet,id',
+    //     maxResults: 25,
+    //     topicId: '/m/02vxn'
 
-    });
-    console.log(videoSearchServiceResponse);
+    // });
+    //console.log(videoSearchServiceResponse);
 
 
     await res.json({

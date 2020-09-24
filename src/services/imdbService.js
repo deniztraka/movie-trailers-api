@@ -16,6 +16,30 @@ export default class IMDbService extends HttpService {
                 "x-rapidapi-key": process.env.IMDB_API_KEY,
                 "useQueryString": true
             }
+        }, 'imdb_movies_', 3600);
+    }
+
+    async sendRequest(qs) {
+        var cachedData = await this.getCache(qs.q);
+        if (cachedData == null) {
+            var response = await super.sendRequest(qs);
+            //get rid of unwanted results
+            var clearResults = this.clearResults(response);
+            this.setCahce(qs.q, 60, clearResults);
+            return await clearResults;
+        }
+    }
+
+    clearResults(response) {
+        if (response == null) {
+            return;
+        }
+
+        //base requirement for any movie on imdb
+        var records = response.results.filter(record => {
+            return record.titleType === 'movie' && record.year;
         });
+
+        return records;
     }
 }

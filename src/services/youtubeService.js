@@ -15,6 +15,6 @@ export default class YoutubeService extends HttpService {
             qs: {
                 key: process.env.YOUTUBE_API_KEY               
             }
-        });
+        }, 'youtube_videos_', 3600);
     }
 };
