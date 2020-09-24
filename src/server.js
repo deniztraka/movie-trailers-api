@@ -2,12 +2,13 @@ import express from 'express';
 import 'express-async-errors';
 import bodyParser from 'body-parser';
 import redis from 'redis';
-import dotenv from 'dotenv';
 import helmet from 'helmet';
 import cors from 'cors';
 import morgan from 'morgan';
-// env variables
+import dotenv from 'dotenv';
 dotenv.config();
+// env variables
+
 
 const app = express();
 
