@@ -4,7 +4,7 @@ import request from 'request-promise';
 import redisClient from '../redis/redisClient';
 
 export default class HttpService {
-    constructor(options, cacheKeyPrefix, cacheExp ) {
+    constructor(options, cacheKeyPrefix, cacheExp) {
         this.cacheKeyPrefix = cacheKeyPrefix;
         this.options = options;
         this.cacheExpInSeconds = cacheExp ? cacheExp : 3600;
@@ -23,20 +23,20 @@ export default class HttpService {
 
             redisClient.get(cacheKey, function (err, cachedData) {
                 if (err) throw err;
-    
+
                 if (cachedData != null) {
                     console.log('data is found in the cache with the key: ' + cacheKey);
-                    resolve(JSON.parse(cachedData));                    
+                    resolve(JSON.parse(cachedData));
                 }
 
                 resolve();
-            }); 
+            });
         });
     }
 
-    setCahce(key, data) {
+    setCache(key, data, expInSeconds) {
         var cacheKey = this.cacheKeyPrefix + key;
-        redisClient.setex(cacheKey, this.cacheExpInSeconds, JSON.stringify(data));
+        redisClient.setex(cacheKey, expInSeconds ? expInSeconds : this.cacheExpInSeconds, JSON.stringify(data));
         console.log('data is cached with the key: ' + cacheKey);
         return data;
     }

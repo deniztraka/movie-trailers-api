@@ -2,40 +2,25 @@
 
 import express from 'express';
 import authMiddleware from '../auth/okta';
-import LocalServiceRegistery from '../utils/localServiceRegistry';
 import dotenv from 'dotenv';
+import SearchHandler from '../search/searchHandler'
 
 const router = express.Router();
 
 router.get('/v1/trailers', authMiddleware, async (req, res) => {
     dotenv.config();
 
+    // get search phrase
     var searchPhrase = req.query.q;
-    var localServiceRegistery = new LocalServiceRegistery();
+    
+    var searchHandler = new SearchHandler();
+    searchHandler.setSearchStrategy(process.env.SEARCH_STRATEGY);
+    var records = await searchHandler.search(searchPhrase);
 
-    // movie search service request
-    var movieSearchService = localServiceRegistery.get(process.env.MOVIE_SEARCH_SERVICE);
-    var movieSearchServiceResponse = await movieSearchService.sendRequest({
-        q: searchPhrase
-    });
-    //console.log(movieSearchServiceResponse.length + " movies");
-
-    //video serch service request
-    // var videoSearchService = localServiceRegistery.get(process.env.VIDEO_SEARCH_SERVICE);
-    // var videoSearchServiceResponse = await videoSearchService.sendRequest({
-    //     q: searchPhrase,
-    //     part: 'snippet,id',
-    //     maxResults: 25,
-    //     topicId: '/m/02vxn'
-
-    // });
-    //console.log(videoSearchServiceResponse);
-
-
-    await res.json({
+    res.json({
         code: 200,
         msg: "Success",
-        records: []
+        records: records
     });
 });
 

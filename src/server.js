@@ -26,7 +26,9 @@ app.use(morgan('combined'));
 
 //routes
 import trailersRoute from './routes/trailers';
+import moviesRoute from './routes/movies';
 app.use('/', trailersRoute);
+app.use('/', moviesRoute);
 
 app.get("/", (req, res) => {
     res.send("online v1");

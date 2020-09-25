@@ -2,7 +2,7 @@
 
 import HttpService from '../services/httpservice';
 import dotenv from 'dotenv';
-
+import { ImdbMovieMapper } from '../mappers/imdbMovieMapper';
 
 export default class IMDbService extends HttpService {
     constructor() {
@@ -20,14 +20,25 @@ export default class IMDbService extends HttpService {
     }
 
     async sendRequest(qs) {
-        var cachedData = await this.getCache(qs.q);
+        var cacheKey = qs.q.replace(/ /g,'').toLowerCase();
+
+        var cachedData = await this.getCache(cacheKey);
         if (cachedData == null) {
+
             var response = await super.sendRequest(qs);
+            console.log(response.results.length + ' movies found for search term ' + qs.q + ' from imdb service');
             //get rid of unwanted results
             var clearResults = this.clearResults(response);
-            this.setCahce(qs.q, 60, clearResults);
-            return await clearResults;
+            var records = [];
+            clearResults.forEach(movie => {
+                records.push(ImdbMovieMapper.map(movie));
+            });
+
+            this.setCache(cacheKey, records, 3600);
+            return await records;
         }
+
+        return cachedData;
     }
 
     clearResults(response) {

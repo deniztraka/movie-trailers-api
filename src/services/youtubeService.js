@@ -2,7 +2,7 @@
 
 import HttpService from './httpservice';
 import dotenv from 'dotenv';
-
+import { YoutubeVideoMapper } from '../mappers/youtubeVideoMapper';
 
 export default class YoutubeService extends HttpService {
     constructor() {
@@ -13,8 +13,25 @@ export default class YoutubeService extends HttpService {
             json: true,
             method: 'GET',
             qs: {
-                key: process.env.YOUTUBE_API_KEY               
+                key: process.env.YOUTUBE_API_KEY
             }
         }, 'youtube_videos_', 3600);
     }
-};
+
+    async sendRequest(qs) {
+        var cacheKey = qs.q.replace(/ /g,'').toLowerCase();
+
+        var cachedData = await this.getCache(cacheKey);
+        if (cachedData == null) {
+            var response = await super.sendRequest(qs);
+            var records = [];
+            response.items.forEach(youtubeVideo => {
+                records.push(YoutubeVideoMapper.map(youtubeVideo));
+            });
+            this.setCache(cacheKey, records, 3600);
+            return await records;
+        }
+
+        return cachedData;
+    }
+}
