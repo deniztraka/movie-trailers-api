@@ -27,7 +27,7 @@ export default class DetailedSearchStrategy extends BaseSearchStrategy {
         for (let i = 0; i < this.movies.length; i++) {
             var movie = this.movies[i];
             var relatedTrailerVideos = await this.getVideos(movie.title + " " + movie.year + " trailer");
-            console.log(relatedTrailerVideos.length + " videos for " + movie.title);
+            //console.log(relatedTrailerVideos.length + " videos for " + movie.title);
             videos = videos.concat(relatedTrailerVideos);
         }
 
@@ -38,11 +38,9 @@ export default class DetailedSearchStrategy extends BaseSearchStrategy {
     filterRecords(records){
         if(records == null || records.length == 0){
             return [];
-        }
+        }        
 
-        var filteredRecords = [];
-
-        const result = records.filter(record => {
+         var filteredRecords = records.filter(record => {
             var lowerCaseTitle = record.title.toLowerCase();
 
             if(lowerCaseTitle.indexOf("trailer") > -1 ){

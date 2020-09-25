@@ -1,8 +1,9 @@
 import OktaJwtVerifier from '@okta/jwt-verifier';
+import AuthorizationError from '../error/authorizationError';
 
 module.exports = async (req, res, next) => {
+    
     try {
-
         // this should be out of this scope but it has issues with env variables does not get intialized before start
         var oktaJwtVerifier = new OktaJwtVerifier({
             issuer: process.env.ISSUER,
@@ -14,19 +15,20 @@ module.exports = async (req, res, next) => {
         const {
             authorization
         } = req.headers
-        if (!authorization) throw new Error('You must send an Authorization header')
+        if (!authorization) throw new AuthorizationError('You must send an Authorization header');
 
         const [authType, token] = authorization.trim().split(' ')
-        if (authType !== 'Bearer') throw new Error('Expected a Bearer token')
+        if (authType !== 'Bearer') throw new AuthorizationError('Expected a Bearer token');
 
         const {
             claims
-        } = await oktaJwtVerifier.verifyAccessToken(token,'api://default')
+        } = await oktaJwtVerifier.verifyAccessToken(token, 'api://default');
         if (!claims.scp.includes(process.env.SCOPE)) {
-            throw new Error('Could not verify the proper scope')
+            throw new AuthorizationError('Could not verify the proper scope');
         }
-        next()
-    } catch (error) {
-        next(error.message)
+        
+        next();
+    } catch (error) {       
+        next(error)
     }
 }

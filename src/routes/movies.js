@@ -1,14 +1,16 @@
 "use strict";
 
 import express from 'express';
-import authMiddleware from '../auth/okta';
 import dotenv from 'dotenv';
 import LocalServiceRegistry from '../utils/localServiceRegistry';
+import authMiddleware from '../middlewares/auth';
+import InputValidationMiddleware from '../middlewares/inputValidationMiddleware';
 
 const router = express.Router();
-
-router.get('/v1/movies', authMiddleware, async (req, res) => {
+router.get('/v1/movies', InputValidationMiddleware, authMiddleware, async (req, res) => {
     dotenv.config();
+
+    console.log("movies");
 
     // get search phrase
     var searchPhrase = req.query.q;
@@ -19,13 +21,14 @@ router.get('/v1/movies', authMiddleware, async (req, res) => {
     // movie search request
     var records = await movieSearchService.sendRequest({
         q: searchPhrase
-    });    
+    });
 
     res.json({
         code: 200,
         msg: "Success",
         records: records
     });
+
 });
 
 export default router;

@@ -24,7 +24,7 @@ export default class IMDbService extends HttpService {
 
         var cachedData = await this.getCache(cacheKey);
         if (cachedData == null) {
-
+            //console.log("going to imdb service");
             var response = await super.sendRequest(qs);
             console.log(response.results.length + ' movies found for search term ' + qs.q + ' from imdb service');
             //get rid of unwanted results

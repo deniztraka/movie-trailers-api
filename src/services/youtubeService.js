@@ -23,6 +23,7 @@ export default class YoutubeService extends HttpService {
 
         var cachedData = await this.getCache(cacheKey);
         if (cachedData == null) {
+            //console.log("going to youtube service");
             var response = await super.sendRequest(qs);
             var records = [];
             response.items.forEach(youtubeVideo => {
