@@ -10,8 +10,6 @@ const router = express.Router();
 router.get('/v1/movies', InputValidationMiddleware, authMiddleware, async (req, res) => {
     dotenv.config();
 
-    console.log("movies");
-
     // get search phrase
     var searchPhrase = req.query.q;
 
