@@ -2,7 +2,9 @@
 
 import HttpService from '../services/httpservice';
 import dotenv from 'dotenv';
-import { ImdbMovieMapper } from '../mappers/imdbMovieMapper';
+import {
+    ImdbMovieMapper
+} from '../mappers/imdbMovieMapper';
 
 export default class IMDbService extends HttpService {
     constructor() {
@@ -16,11 +18,11 @@ export default class IMDbService extends HttpService {
                 "x-rapidapi-key": process.env.IMDB_API_KEY,
                 "useQueryString": true
             }
-        }, 'imdb_movies_', 3600);
+        }, true, 'imdb_movies_', 3600);
     }
 
     async sendRequest(qs) {
-        var cacheKey = qs.q.replace(/ /g,'').toLowerCase();
+        var cacheKey = qs.q.replace(/ /g, '').toLowerCase();
 
         var cachedData = await this.getCache(cacheKey);
         if (cachedData == null) {

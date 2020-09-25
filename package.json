@@ -6,7 +6,7 @@
   "scripts": {
     "build": "babel src -d dist --source-maps",
     "start": "nodemon --exec babel-node src/server",
-    "test": "jest --runInBand ./test"
+    "tests": "jest --runInBand ./tests"
   },
   "repository": {
     "type": "git",
@@ -37,7 +37,9 @@
     "morgan": "^1.10.0",
     "nodemon": "^2.0.4",
     "redis": "^3.0.2",
-    "request-promise": "^4.2.6"
+    "request-promise": "^4.2.6",
+    "superagent": "^6.1.0",
+    "supertest": "^5.0.0"
   },
   "devDependencies": {}
 }

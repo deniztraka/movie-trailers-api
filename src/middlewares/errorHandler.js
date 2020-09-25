@@ -2,7 +2,9 @@ import AuthorizationError from '../error/authorizationError'
 import ValidationError from '../error/validationError'
 
 module.exports = (err, req, res, next) => {    
-    console.log("errorhandler");
+    // if(err){
+    //     console.log(err);
+    // }
 
     //check different type of errors
     if (err instanceof ValidationError) {
@@ -16,7 +18,7 @@ module.exports = (err, req, res, next) => {
     if (err instanceof AuthorizationError) {
         res.status(403);
         res.json({
-            code: 403,
+            status: 403,
             msg: err.message
         });
     } else if (err) {

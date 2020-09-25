@@ -1,27 +1,33 @@
 "use strict";
 
 import request from 'request-promise';
-import redisClient from '../redis/redisClient';
 
 export default class HttpService {
-    constructor(options, cacheKeyPrefix, cacheExp) {
+    constructor(options, useCaching, cacheKeyPrefix, cacheExp) {
         this.cacheKeyPrefix = cacheKeyPrefix;
         this.options = options;
         this.cacheExpInSeconds = cacheExp ? cacheExp : 3600;
+        this.useCaching = useCaching;
+        if (useCaching) {
+            this.redisClient = require('../redis/redisClient');
+        }
     }
 
     async sendRequest(qs) {
         let extendedQueryStringObject = Object.assign({}, this.options.qs, qs);
         this.options.qs = extendedQueryStringObject;
-        var response = await request(this.options);
-        return response;
+        return await request(this.options);
     }
 
     getCache(key) {
+        if(!this.useCaching){
+            return null;
+        }
+
         return new Promise(resolve => {
             var cacheKey = this.cacheKeyPrefix + key;
 
-            redisClient.get(cacheKey, function (err, cachedData) {
+            this.redisClient.get(cacheKey, function (err, cachedData) {
                 if (err) throw err;
 
                 if (cachedData != null) {
@@ -35,8 +41,12 @@ export default class HttpService {
     }
 
     setCache(key, data, expInSeconds) {
+        if(!this.useCaching){
+            return;
+        }
+
         var cacheKey = this.cacheKeyPrefix + key;
-        redisClient.setex(cacheKey, expInSeconds ? expInSeconds : this.cacheExpInSeconds, JSON.stringify(data));
+        this.redisClient.setex(cacheKey, expInSeconds ? expInSeconds : this.cacheExpInSeconds, JSON.stringify(data));
         console.log('data is cached with the key: ' + cacheKey);
         return data;
     }

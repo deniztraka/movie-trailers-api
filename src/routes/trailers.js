@@ -2,17 +2,18 @@
 
 import express from 'express';
 import dotenv from 'dotenv';
+import LocalServiceRegistry from '../utils/localServiceRegistry';
 import authMiddleware from '../middlewares/auth';
 import inputValidationMiddleware from '../middlewares/inputValidationMiddleware';
 
 const router = express.Router();
-router.get('/v1/trailers', inputValidationMiddleware, authMiddleware, async (req, res) => {
+router.get('/api/v1/trailers', inputValidationMiddleware, authMiddleware, async (req, res) => {
     dotenv.config();
 
     // get search phrase
     var searchPhrase = req.query.q;
 
-    var localServiceRegistery = new LocalServiceRegistery();
+    var localServiceRegistery = new LocalServiceRegistry();
     var videoSearchService = localServiceRegistery.get(process.env.VIDEO_SEARCH_SERVICE);
 
     //video search service request
@@ -28,7 +29,7 @@ router.get('/v1/trailers', inputValidationMiddleware, authMiddleware, async (req
     });
 
     res.json({
-        code: 200,
+        status: 200,
         msg: "Success",
         records: records
     });
