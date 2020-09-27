@@ -1,5 +1,9 @@
 "use strict";
 
+/**
+ * Imdb Movie Service
+ */
+
 import HttpService from '../services/httpservice';
 import dotenv from 'dotenv';
 import {
@@ -21,25 +25,38 @@ export default class IMDbService extends HttpService {
         }, true, 'imdb_movies_', 3600);
     }
 
+     /**
+     * Makes async service call to the imdb
+     * Overrides base method
+     * @param {string} qs query string oject
+     * @returns {Object} service response
+     */
     async sendRequest(qs) {
+        // prepares cache key
         var cacheKey = qs.q.replace(/ /g, '').toLowerCase();
 
+        //checks if we have cached data
         var cachedData = await this.getCache(cacheKey);
         if (cachedData == null) {
-            //console.log("going to imdb service");
+
+            // going to imdb service since there is no cached data if we are here
             var response = await super.sendRequest(qs);
             console.log(response.results.length + ' movies found for search term ' + qs.q + ' from imdb service');
-            //get rid of unwanted results
+
+            //getting rid of unwanted results
             var clearResults = this.clearResults(response);
             var records = [];
             clearResults.forEach(movie => {
+                // map results to our domain model
                 records.push(ImdbMovieMapper.map(movie));
             });
 
-            this.setCache(cacheKey, records, 3600);
+            // set data to cache
+            this.setCache(cacheKey, records, 3600);                        
             return await records;
         }
 
+        //return cachedData
         return cachedData;
     }
 

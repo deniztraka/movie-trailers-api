@@ -1,5 +1,8 @@
 'use strict'
 
+/**
+ * Our domain model - Video
+ */
 export default class VideoModel {
     constructor() {
         this.id = null;

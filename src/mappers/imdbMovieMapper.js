@@ -1,5 +1,8 @@
 'use strict'
-
+/**
+ * IMDB Mobie Mapper
+ * Responsible for mapping imdb movie model to our domain model.
+ */
 import MovieModel from "../models/movieModel";
 
 export const ImdbMovieMapper = {

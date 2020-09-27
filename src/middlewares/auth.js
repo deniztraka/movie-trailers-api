@@ -1,3 +1,9 @@
+'use strict'
+
+/**
+ * Authorization middleware that uses OKTA Auth Service
+ */
+
 import OktaJwtVerifier from '@okta/jwt-verifier';
 import AuthorizationError from '../error/authorizationError';
 
@@ -12,14 +18,17 @@ module.exports = async (req, res, next) => {
             jwksRequestsPerMinute: 1000
         });
 
+        //check if request header has authorization header
         const {
             authorization
         } = req.headers
         if (!authorization) throw new AuthorizationError('You must send an Authorization header');
 
-        const [authType, token] = authorization.trim().split(' ')
+        // check if auth type Bearer
+        const [authType, token] = authorization.trim().split(' ');
         if (authType !== 'Bearer') throw new AuthorizationError('Expected a Bearer token');
 
+        // verifying access token
         const {
             claims
         } = await oktaJwtVerifier.verifyAccessToken(token, 'api://default');

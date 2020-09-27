@@ -1,5 +1,9 @@
 'use strict'
 
+/**
+ * Video Mapper
+ * Responsible for mapping youtube video model to our domain model.
+ */
 import VideoModel from "../models/videoModel";
 
 export const YoutubeVideoMapper = {

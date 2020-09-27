@@ -1,4 +1,6 @@
-import ValidationError from '../error/validationError';
+/**
+ * Validates query object
+ */
 
 export default class InputValidator {
     constructor() {}

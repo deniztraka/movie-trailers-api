@@ -10,6 +10,7 @@ const registry = {
 /**
  * Used for getting services registered on this class
  * Stands for service domain that knows every service withing application
+ * registry should be updated with every new service class
  */
 export default class LocalServiceRegistry {
     constructor() {
@@ -19,7 +20,7 @@ export default class LocalServiceRegistry {
      * Prepares an HttpService object by getting it from registry
      * 
      * @param {string} service service name
-     * @returns {object} HttpService object
+     * @returns {Object} HttpService object
      */
     get(service) {
         return registry[service];

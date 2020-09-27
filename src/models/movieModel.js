@@ -1,5 +1,11 @@
 'use strict'
 
+'use strict'
+
+/**
+ * Our domain model - Movie
+ */
+
 export default class MovieModel {
     constructor() {
         this.id = null;

@@ -5,6 +5,8 @@ import superagent from 'superagent';
 dotenv.config();
 
 var authToken = null;
+
+// First authenticate, then test
 beforeAll(async (done) => {
     const res = await superagent.post(process.env.ISSUER + '/v1/token')
         .auth(process.env.CLIENT_ID, process.env.CLIENT_SECRET)
@@ -21,6 +23,9 @@ beforeAll(async (done) => {
     authToken = res.body.access_token;
 });
 
+/**
+ * API Endpoint Tests
+ */
 describe('API Endpoint Tests', () => {
     it('Should have auth token', () => {
         expect(authToken).not.toBeNull();

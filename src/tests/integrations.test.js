@@ -39,8 +39,7 @@ describe('## Service Integration Tests ## ', () => {
         var imdbService = new HttpService(imdbServiceOptions, false);
         const response = await imdbService.sendRequest({
             q: "The Batman"
-        });
-        //console.log(response);
+        });        
         expect(response.results.length).toBeGreaterThan(0);
     });
 });

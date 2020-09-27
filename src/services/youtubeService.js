@@ -6,6 +6,10 @@ import {
     YoutubeVideoMapper
 } from '../mappers/youtubeVideoMapper';
 
+/**
+ * Youtube Video Service
+ */
+
 export default class YoutubeService extends HttpService {
     constructor() {
         dotenv.config();
@@ -20,17 +24,29 @@ export default class YoutubeService extends HttpService {
         }, true, 'youtube_videos_', 3600);
     }
 
+    /**
+     * Makes async service call to the youtube data api
+     * Overrides base method
+     * @param {string} qs query string oject
+     * @returns {Object} service response
+     */
     async sendRequest(qs) {
+        // prepares cache key
         var cacheKey = qs.q.replace(/ /g, '').toLowerCase();
 
+        //checks if we have cached data
         var cachedData = await this.getCache(cacheKey);
         if (cachedData == null) {
-            //console.log("going to youtube service");
+
+            // going to youtube service since there is no cached data if we are here
             var response = await super.sendRequest(qs);
             var records = [];
             response.items.forEach(youtubeVideo => {
+                // map results to our domain model
                 records.push(YoutubeVideoMapper.map(youtubeVideo));
             });
+            
+            // set data to cache
             this.setCache(cacheKey, records, 3600);
             return await records;
         }

@@ -1,7 +1,13 @@
 'use strict'
-
+/**
+ * This class does the same thing but it sends video search request to video service.
+ * It is blocked by maximum calls per second quota limit on Youtube for now.
+ * 
+ * ** Don't use it yet! (Especially if you are using free plan.)
+ * It should be improved further or replaced with another solution.
+ * 
+ */
 import DetailedSearchStrategy from "./detailedSearchStrategy";
-import LocalServiceRegistery from '../utils/localServiceRegistry';
 import dotenv from 'dotenv';
 /**
  * Tried for parallely sending related VİDEO search request for each movie to video search api
@@ -16,6 +22,14 @@ export default class DetailedSearchStrategyParallel extends DetailedSearchStrate
         this.videos = null;
     }
 
+    /**
+     * Gets movies related with given search query
+     * Iterates every movie and make calls to video service in parallell
+     * caches every video related with movie
+     * returns videos found from video service
+     * 
+     * @param {string} q search query
+     */
     async process(q) {
         // get related movies with the search term
         this.movies = await this.getMovies(q);
