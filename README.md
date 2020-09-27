@@ -5,6 +5,7 @@ This api lists movie trailers by gathering informations from IMDb and Youtube.
 - Using Node.js with Express
 - Secured with [Okta](https://www.okta.com "Okta") OAuth 2.0
 - Using AWS ElastiCache to cache collected data to speed up response time
+- Using [jest](https://jestjs.io/en/ "jest") on tests
 - Using [helmet](https://www.npmjs.com/package/helmet "helmet") package to enhance api security
 - Using [morgan](https://www.npmjs.com/package/morgan "morgan") package as a request logger middleware
 - Using [cors](https://github.com/expressjs/cors#readme "cors") package for enabling CORS for all requests.
@@ -123,7 +124,7 @@ Keys are made from the format like below;
 
 If there is no cache found in  ElastiCache Redis cluster, data is cached for 1h with the related cache key. Cache time can be expanded to 1d/1w. I used 1h since I'm using free tier and I don't want to get it grow so much.
 
-## Flow Diagram
+#### Flow Diagram
 ![UML Flow Diagram](https://raw.githubusercontent.com/deniztraka/movie-trailers-api/master/assets/Rest%20API%20Happy%20Flow.png)
 
 ### Important Topics of the Implementation that I want to mention
@@ -164,6 +165,13 @@ Populer search phrases will provide better results in time.
 Security is handled with a third party service so there is no responsibility on the API.
 API is only responsible for checking if token is still valid for the request coming from the client. But in here we have a dependency on the oauth service. But we can further improve this and remove this dependeny by using LocalServiceRegistry class. I just didn't have time for it.
 
+##### Tests
+Tests are implemented with Jest Testing framework.
+There are three types of test file in /tests folder.
+-- endpoint.test.js file is responsible for api endpoint tests.
+-- integrations.test.js file is responsible for service integration tests (youtube, imdb)
+-- redisClient.test.js file is responsible for to test redis server availability checks
+
 ### Further Improvements
 ##### Speed up api response time
 API response time can be speed up further by adding a queue solution. What I have in mind to have a queue for movies that is coming from movie service.
@@ -179,4 +187,34 @@ Since system uses only one account for auth checks, auth token may not be valid 
 
 Because auth token should be gathered from client/apps that is used this service. So auth token can be refreshed between two calls. This situation can create invalid token exceptions.
 
-So as an improvement, auth token checks should be made for client id's coming from client/app.
+So as an improvem auth token checks should be made for client id's coming from client/app.
+
+### Installation
+
+Install dependencies
+`npm install`
+
+Create .env filelike below on root folder
+
+
+    REDIS_CLUSTER_HOST=127.0.10.1
+    ISSUER={okta auth issuer host name}
+    SCOPE={okta scope name}
+    CLIENT_ID={auth client id}
+    CLIENT_SECRET={auth pssword}
+    
+    
+    IMDB_API_HOST={imdb api service host}
+    IMDB_API_KEY={imdb api key}
+    
+    YOUTUBE_API_HOST=www.googleapis.com
+    YOUTUBE_API_KEY={youtube api key}
+    
+    MOVIE_SEARCH_SERVICE=imdb
+    VIDEO_SEARCH_SERVICE=youtube
+
+
+**Start server: ** npm run start
+**Run tests:** npm run tests
+
+You can also find test postman collection in /assets/postman folder.

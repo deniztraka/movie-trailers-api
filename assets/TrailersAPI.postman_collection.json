@@ -1,0 +1,189 @@
+{
+	"info": {
+		"_postman_id": "df64b661-6625-4eb3-b88a-9fcd824b3391",
+		"name": "TrailersAPI",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+	},
+	"item": [
+		{
+			"name": "Trailers-Get",
+			"protocolProfileBehavior": {
+				"disableBodyPruning": true
+			},
+			"request": {
+				"auth": {
+					"type": "bearer",
+					"bearer": [
+						{
+							"key": "token",
+							"value": "eyJraWQiOiJFbjZ3aVByOFpTOFdXb20ySlAxUFQ0SmE2Q1ZwcHVJSkJLLV9ZbTVGdXF3IiwiYWxnIjoiUlMyNTYifQ.eyJ2ZXIiOjEsImp0aSI6IkFULjNRU2NneGtqY0lmR05xY0d5czcxdV9HTWVGT1c4b0t1MFRBV3RxcTdwUm8iLCJpc3MiOiJodHRwczovL2Rldi02MzI1NjIub2t0YS5jb20vb2F1dGgyL2RlZmF1bHQiLCJhdWQiOiJhcGk6Ly9kZWZhdWx0IiwiaWF0IjoxNjAxMjI3MzU4LCJleHAiOjE2MDEyMzA5NTgsImNpZCI6IjBvYTExanJtdmdSMTVTbFlYNHg3Iiwic2NwIjpbInRyYWlsZXJzX21hbmFnZXIiXSwic3ViIjoiMG9hMTFqcm12Z1IxNVNsWVg0eDcifQ.CFHm4WoQbpdT2_wJhbdOLIbnI9lbx5yY-1Ys0xyDnsFuw2KpxAb5LyJqNsu6ToZ6NlcLcw_tIjCDT9fPtTs_45Vym9T-EYt520sJUXoMVRiiCyyN7-meF74XPUx_dSxFe-m8YuyKw8UuoPlU7qT3gTzFfaTFABR3RSNxUvYtuKmfe-Fcsfl7Ail1dLILR3HJmTMOWvUjjatYak9g__v-8KLwFpG9lB6Pb3Gm5hJql3kf4xlgyO7T71gXaphXizdoOufB5ZUJxnMe76Ot3nBeX_8X6dM7AnOi40KC_NMd1ecz0L3MyLs0uX5DG6zNIOrv_AOAG1MpU7aoyyonQIuXKw",
+							"type": "string"
+						}
+					]
+				},
+				"method": "GET",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": ""
+				},
+				"url": {
+					"raw": "http://{{hostname}}/api/v1/trailers?q",
+					"protocol": "http",
+					"host": [
+						"{{hostname}}"
+					],
+					"path": [
+						"api",
+						"v1",
+						"trailers"
+					],
+					"query": [
+						{
+							"key": "q",
+							"value": null
+						}
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Movies-Get",
+			"request": {
+				"auth": {
+					"type": "bearer",
+					"bearer": [
+						{
+							"key": "token",
+							"value": "eyJraWQiOiJFbjZ3aVByOFpTOFdXb20ySlAxUFQ0SmE2Q1ZwcHVJSkJLLV9ZbTVGdXF3IiwiYWxnIjoiUlMyNTYifQ.eyJ2ZXIiOjEsImp0aSI6IkFULnJ1TGVhQnZXbk1HcXJ1ODZQT24xQ0VuZTEyT19rNEZCdGZBRFdPN1JLMjAiLCJpc3MiOiJodHRwczovL2Rldi02MzI1NjIub2t0YS5jb20vb2F1dGgyL2RlZmF1bHQiLCJhdWQiOiJhcGk6Ly9kZWZhdWx0IiwiaWF0IjoxNjAxMDcwMzEwLCJleHAiOjE2MDEwNzM5MTAsImNpZCI6IjBvYTExanJtdmdSMTVTbFlYNHg3Iiwic2NwIjpbInRyYWlsZXJzX21hbmFnZXIiXSwic3ViIjoiMG9hMTFqcm12Z1IxNVNsWVg0eDcifQ.i238fmwOPZQ_VbOi3_0Xd7J6R1DMMx0fIMs5EgnVVpt8s21U0492WaFA4oKEONyXLh2r5YGMmmy9rZOFOG659JYITcF714ivDisHFWX-7qx4i6dS9RiF1raxeSvvanvEVe6P_XELiEKS9WGhLxLirzK1pQwxPOElmIQh1p_u3aqUqEcxz0A57Eu1-1lBrxKDdCJDcQGda05fK5Gi0FDZ2gqYw2KBJrhvxogBhc8hPx79hCYN2a4t-GEBOAbKqr3ETpF0j4aNHsKVucJbbuXS6-RqpMQm3fb0uZTQiHSgc4cFknMYlqHt-7RXykzwsPvJl6xtIVE3pumw_tWc9IF-Dw",
+							"type": "string"
+						}
+					]
+				},
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "http://{{hostname}}/api/v1/movies?q=The Butterfly Effect",
+					"protocol": "http",
+					"host": [
+						"{{hostname}}"
+					],
+					"path": [
+						"api",
+						"v1",
+						"movies"
+					],
+					"query": [
+						{
+							"key": "q",
+							"value": "The Butterfly Effect"
+						}
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "search",
+			"request": {
+				"auth": {
+					"type": "bearer",
+					"bearer": [
+						{
+							"key": "token",
+							"value": "eyJraWQiOiJFbjZ3aVByOFpTOFdXb20ySlAxUFQ0SmE2Q1ZwcHVJSkJLLV9ZbTVGdXF3IiwiYWxnIjoiUlMyNTYifQ.eyJ2ZXIiOjEsImp0aSI6IkFULnJ1TGVhQnZXbk1HcXJ1ODZQT24xQ0VuZTEyT19rNEZCdGZBRFdPN1JLMjAiLCJpc3MiOiJodHRwczovL2Rldi02MzI1NjIub2t0YS5jb20vb2F1dGgyL2RlZmF1bHQiLCJhdWQiOiJhcGk6Ly9kZWZhdWx0IiwiaWF0IjoxNjAxMDcwMzEwLCJleHAiOjE2MDEwNzM5MTAsImNpZCI6IjBvYTExanJtdmdSMTVTbFlYNHg3Iiwic2NwIjpbInRyYWlsZXJzX21hbmFnZXIiXSwic3ViIjoiMG9hMTFqcm12Z1IxNVNsWVg0eDcifQ.i238fmwOPZQ_VbOi3_0Xd7J6R1DMMx0fIMs5EgnVVpt8s21U0492WaFA4oKEONyXLh2r5YGMmmy9rZOFOG659JYITcF714ivDisHFWX-7qx4i6dS9RiF1raxeSvvanvEVe6P_XELiEKS9WGhLxLirzK1pQwxPOElmIQh1p_u3aqUqEcxz0A57Eu1-1lBrxKDdCJDcQGda05fK5Gi0FDZ2gqYw2KBJrhvxogBhc8hPx79hCYN2a4t-GEBOAbKqr3ETpF0j4aNHsKVucJbbuXS6-RqpMQm3fb0uZTQiHSgc4cFknMYlqHt-7RXykzwsPvJl6xtIVE3pumw_tWc9IF-Dw",
+							"type": "string"
+						}
+					]
+				},
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "http://{{hostname}}/api/v1/search?q=The Butterfly Effect",
+					"protocol": "http",
+					"host": [
+						"{{hostname}}"
+					],
+					"path": [
+						"api",
+						"v1",
+						"search"
+					],
+					"query": [
+						{
+							"key": "q",
+							"value": "The Butterfly Effect"
+						}
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Auth",
+			"request": {
+				"auth": {
+					"type": "basic",
+					"basic": [
+						{
+							"key": "username",
+							"value": "someusername",
+							"type": "string"
+						},
+						{
+							"key": "password",
+							"value": "somepass",
+							"type": "string"
+						}
+					]
+				},
+				"method": "POST",
+				"header": [
+					{
+						"key": "",
+						"value": "",
+						"type": "text"
+					}
+				],
+				"body": {
+					"mode": "urlencoded",
+					"urlencoded": [
+						{
+							"key": "grant_type",
+							"value": "client_credentials",
+							"type": "text"
+						},
+						{
+							"key": "scope",
+							"value": "trailers_manager",
+							"type": "text"
+						}
+					],
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "https://dev-632562.okta.com/oauth2/default/v1/token",
+					"protocol": "https",
+					"host": [
+						"dev-632562",
+						"okta",
+						"com"
+					],
+					"path": [
+						"oauth2",
+						"default",
+						"v1",
+						"token"
+					]
+				}
+			},
+			"response": []
+		}
+	],
+	"protocolProfileBehavior": {}
+}
