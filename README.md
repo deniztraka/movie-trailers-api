@@ -123,7 +123,7 @@ Keys are made from the format like below;
 
 If there is no cache found in  ElastiCache Redis cluster, data is cached for 1h with the related cache key. Cache time can be expanded to 1d/1w. I used 1h since I'm using free tier and I don't want to get it grow so much.
 
-#### Flow Diagram
+## Flow Diagram
 ![UML Flow Diagram](https://raw.githubusercontent.com/deniztraka/movie-trailers-api/master/assets/Rest%20API%20Happy%20Flow.png)
 
 ### Important Topics of the Implementation that I want to mention
