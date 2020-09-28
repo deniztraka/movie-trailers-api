@@ -9,13 +9,12 @@ This api lists movie trailers by gathering informations from IMDb and Youtube.
 - Using [helmet](https://www.npmjs.com/package/helmet "helmet") package to enhance api security
 - Using [morgan](https://www.npmjs.com/package/morgan "morgan") package as a request logger middleware
 - Using [cors](https://github.com/expressjs/cors#readme "cors") package for enabling CORS for all requests.
-- Has three endpoints
--- api/v1/trailers 
+- Has two endpoints  
+-- api/v1/trailers   
+-- api/v1/movies  
 
--- api/v1/movies 
 
-
-- Currently hosted on AWS EC2 instance for demonstration
+- Currently hosted on AWS EC2 instance for demonstration  
 http://ec2-13-48-6-117.eu-north-1.compute.amazonaws.com:3000
 
 ## Endpoints
@@ -28,8 +27,8 @@ Currently it is configured to use [IMDb](https://rapidapi.com/apidojo/api/imdb8 
 IT can be attachted to any service by implementing new service class that extends [HttpService.js](https://github.com/deniztraka/movie-trailers-api/blob/master/src/services/httpservice.js "HttpService.js") and configuring related env variables.
 Related environment variables used for this service are listed below
 --- MOVIE_SEARCH_SERVICE=imdb
----IMDB_API_HOST=imdb8.p.rapidapi.com
----IMDB_API_KEY=**
+--- IMDB_API_HOST=imdb8.p.rapidapi.com
+--- IMDB_API_KEY=**
 
 ##### Request and Response Bodies
 ###### Sample Request
@@ -215,9 +214,8 @@ Create .env filelike below on root folder
     VIDEO_SEARCH_SERVICE=youtube
 
 
-**Start server: ** npm run start 
-
-**Run tests:** npm run tests 
+**Start server: ** npm run start  
+**Run tests:** npm run tests  
  
 
 You can also find test postman collection in /assets/postman folder.
