@@ -155,7 +155,7 @@ var records = await movieSearchService.sendRequest({
 	q: searchPhrase
 });
 ```
-As a result; we can change our data services anytime by changing environment variable values.
+As a result; we can change our data services anytime by changing environment variable values. No dependencies.
 
 ##### Caching
 By using AWS Elasticache cluster, api requests will be faster as it is used further. 
@@ -214,7 +214,7 @@ Create .env filelike below on root folder
     VIDEO_SEARCH_SERVICE=youtube
 
 
-**Start server: ** npm run start  
+**Start server:** npm run start  
 **Run tests:** npm run tests  
  
 
