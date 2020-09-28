@@ -10,9 +10,10 @@ This api lists movie trailers by gathering informations from IMDb and Youtube.
 - Using [morgan](https://www.npmjs.com/package/morgan "morgan") package as a request logger middleware
 - Using [cors](https://github.com/expressjs/cors#readme "cors") package for enabling CORS for all requests.
 - Has three endpoints
--- api/v1/trailers
--- api/v1/movies
--- api/v1/trailers/crawl
+-- api/v1/trailers 
+
+-- api/v1/movies 
+
 
 - Currently hosted on AWS EC2 instance for demonstration
 http://ec2-13-48-6-117.eu-north-1.compute.amazonaws.com:3000
@@ -187,7 +188,7 @@ Since system uses only one account for auth checks, auth token may not be valid 
 
 Because auth token should be gathered from client/apps that is used this service. So auth token can be refreshed between two calls. This situation can create invalid token exceptions.
 
-So as an improvem auth token checks should be made for client id's coming from client/app.
+So as an improvem auth token checks should be made with client id's coming from client/app.
 
 ### Installation
 
@@ -214,7 +215,9 @@ Create .env filelike below on root folder
     VIDEO_SEARCH_SERVICE=youtube
 
 
-**Start server: ** npm run start
-**Run tests:** npm run tests
+**Start server: ** npm run start 
+
+**Run tests:** npm run tests 
+ 
 
 You can also find test postman collection in /assets/postman folder.
